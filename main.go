@@ -21,7 +21,8 @@ import (
 	"time"
 )
 
-func init() {
+func main() {
+	// first get all the flags
 	var (
 		flAddr          string
 		flService       string
@@ -106,14 +107,11 @@ func init() {
 			log.Printf("  > server-name=%s", flTLSServerName)
 		}
 	}
-	clArgs = hp.RunProbeArgs{
+	clArgs := hp.RunProbeArgs{
 		FlAddr: flAddr, FlService: flService, FlUserAgent: flUserAgent, FlConnTimeout: flConnTimeout, FlRPCTimeout: flRPCTimeout,
 		FlTLS: flTLS, FlTLSNoVerify: flTLSNoVerify, FlTLSCACert: flTLSCACert, FlTLSClientCert: flTLSClientCert, FlTLSClientKey: flTLSClientKey, FlTLSServerName: flTLSServerName,
 		FlVerbose: flVerbose}
-}
 
-var clArgs hp.RunProbeArgs
-
-func main() {
+	// do the check and exit the programm
 	os.Exit(int(hp.RunProbe(clArgs)))
 }
